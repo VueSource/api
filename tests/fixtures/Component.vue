@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import getDimensions from "./getDimensions";
 import size from "./sizeMixin.js";
 
 export default {
@@ -48,6 +49,7 @@ export default {
   },
   mixins: [size],
   methods: {
+    getDimensions,
     /**
      * Take something and turn it into a different thing.
      * @public

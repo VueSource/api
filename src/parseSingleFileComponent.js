@@ -8,7 +8,11 @@ const compiler = require("vue-template-compiler");
  */
 function parseSingleFileComponent(filePath) {
   const file = fs.readFileSync(path.resolve(filePath)).toString();
-  return compiler.parseComponent(file);
+
+  return {
+    ...compiler.parseComponent(file),
+    path: filePath
+  };
 }
 
 module.exports = parseSingleFileComponent;
