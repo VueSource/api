@@ -2,16 +2,23 @@ const fs = require("fs");
 const path = require("path");
 const compiler = require("vue-template-compiler");
 
+const getComponentMixins = require("./getComponentMixins");
+const getComponentProps = require("./getComponentProps");
+
 /**
  * @param filePath
- * @return {SFCDescriptor}
+ * @return {{template: SFCBlock, path: *, mixins: unknown[], script: SFCBlock, props}}
  */
-function parseSingleFileComponent(filePath) {
-  const file = fs.readFileSync(path.resolve(filePath)).toString();
+function parseSingleFileComponent(pathToComponent) {
+  const file = fs.readFileSync(path.resolve(pathToComponent)).toString();
+  const { template, script } = compiler.parseComponent(file);
 
   return {
-    ...compiler.parseComponent(file),
-    path: filePath
+    script,
+    template,
+    path: pathToComponent,
+    props: getComponentProps({ script, pathToComponent }),
+    mixins: getComponentMixins({ script, pathToComponent })
   };
 }
 

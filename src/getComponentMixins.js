@@ -3,13 +3,21 @@ const { parse } = require("@babel/parser");
 const traverse = require("@babel/traverse");
 const path = require("path");
 
+/**
+ *
+ * @param script {SFCBlock}
+ * @param pathToComponent {string} Absolute Path to the component
+ * @param parserOptions
+ * @return {unknown[]}
+ */
 function getParsedComponentMixin(
-  component,
+  { script, pathToComponent },
   parserOptions = { sourceType: "module" }
 ) {
   const mixins = [];
   const componentImports = [];
-  const ast = parse(component.script.content, parserOptions);
+  const directory = pathToComponent.replace(path.basename(pathToComponent), "");
+  const ast = parse(script.content, parserOptions);
 
   traverse.default(ast, {
     enter(path) {
@@ -31,10 +39,6 @@ function getParsedComponentMixin(
   return componentImports
     .map(({ name, relativePath }) => {
       if (mixins.includes(name)) {
-        const directory = component.path.replace(
-          path.basename(component.path),
-          ""
-        );
         return path.resolve(directory, relativePath);
       }
     })

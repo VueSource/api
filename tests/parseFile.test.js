@@ -1,16 +1,20 @@
-import path from "path";
 import parseSingleFileComponent from "../src/parseSingleFileComponent";
 import { fixturePaths } from "./helpers";
 
-test("parses single file components", () => {
-  const parsed = parseSingleFileComponent(fixturePaths.Component);
+const parsed = parseSingleFileComponent(fixturePaths.Component);
 
+test("includes the component template", () => {
   expect(parsed.template).toBeTruthy();
+});
+
+test("includes the component script", () => {
   expect(parsed.script).toBeTruthy();
 });
 
-test("add the component path to the output", () => {
-  const parsed = parseSingleFileComponent(fixturePaths.Component);
-
+test("includes the component path", () => {
   expect(parsed.path).toEqual(fixturePaths.Component);
+});
+
+test("includes the component props", () => {
+  expect(parsed.props).toBeTruthy();
 });
