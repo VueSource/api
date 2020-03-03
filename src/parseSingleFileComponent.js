@@ -6,8 +6,8 @@ const getComponentMixins = require("./getComponentMixins");
 const getComponentProps = require("./getComponentProps");
 
 /**
- * @param pathToComponent {string} Absolute path to the component
- * @return {{template: SFCBlock, path: *, mixins: unknown[], script: SFCBlock, props}}
+ * @param pathToComponent
+ * @return {{template: SFCBlock, path: *, mixins: unknown[], script: SFCBlock, props: *[]}}
  */
 function parseSingleFileComponent(pathToComponent) {
   const file = fs.readFileSync(path.resolve(pathToComponent)).toString();
