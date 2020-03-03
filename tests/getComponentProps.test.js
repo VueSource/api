@@ -16,6 +16,11 @@ test("returns an array of props", () => {
 
 test("the array contains these keys", () => {
   componentProps.every(prop => {
-    expect(Object.keys(prop)).toEqual(["name", "location", "definition"]);
+    expect(Object.keys(prop)).toEqual([
+      "name",
+      "location",
+      "definition",
+      "jsdoc"
+    ]);
   });
 });
