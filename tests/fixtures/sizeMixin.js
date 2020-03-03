@@ -1,13 +1,12 @@
 export default {
   props: {
-
     /**
      * The size of the thing that you're referring to.
      */
     size: {
       type: Number,
-      default: 5,
-    },
+      default: 5
+    }
   },
 
   computed: {
@@ -20,8 +19,8 @@ export default {
      *
      * @return {Number}
      */
-    optimizedSize () {
+    optimizedSize() {
       return size - 5;
-    },
-  },
+    }
+  }
 };
