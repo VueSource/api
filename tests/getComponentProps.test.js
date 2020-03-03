@@ -12,5 +12,10 @@ const componentProps = getComponentProps({
 
 test("returns an array of props", () => {
   expect(Array.isArray(componentProps)).toBeTruthy();
-  expect(componentProps.length).toEqual(3);
+});
+
+test("the array contains these keys", () => {
+  componentProps.every(prop => {
+    expect(Object.keys(prop)).toEqual(["name", "location", "definition"]);
+  });
 });
