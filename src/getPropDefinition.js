@@ -4,7 +4,7 @@ const traverse = require("@babel/traverse");
 
 /**
  * @param propName {string}
- * @param script {string}
+ * @param script {SFCBlock}
  * @param parserOptions
  */
 function getRawPropDefinition(
@@ -13,7 +13,7 @@ function getRawPropDefinition(
   parserOptions = { sourceType: "module" }
 ) {
   const props = [];
-  const ast = parse(script, parserOptions);
+  const ast = parse(script.content, parserOptions);
 
   traverse.default(ast, {
     enter(path) {
@@ -29,7 +29,7 @@ function getRawPropDefinition(
 
   const { start, end } = props.find(node => node.key.name === propName);
 
-  return script.substring(start, end);
+  return script.content.substring(start, end);
 }
 
 module.exports = getRawPropDefinition;

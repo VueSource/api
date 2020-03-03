@@ -6,7 +6,7 @@ const filePath = path.resolve(__dirname, "fixtures/Component.vue");
 
 test("finds the search prop definition", () => {
   const { script } = parseFile(filePath);
-  const search = getRawPropDefinition("search", script.content);
+  const search = getRawPropDefinition("search", script);
 
   expect(search).toEqual(
     `search: {
@@ -29,7 +29,7 @@ test("finds the search prop definition", () => {
 
 test("finds the name prop definition", () => {
   const { script } = parseFile(filePath);
-  const name = getRawPropDefinition("name", script.content);
+  const name = getRawPropDefinition("name", script);
 
   expect(name).toEqual(`name: String`);
 });
